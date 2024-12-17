@@ -62,7 +62,7 @@
 
 
 export async function POST(_request: Request) {
-	const { name, industry, stylePreference, colorPreference } =
+	const { name, industry, stylePreference, colorPreference, networks } =
 		await _request.json()
 	//   const userInputs = {
 	//     name, //: 'John Doe',
@@ -76,12 +76,53 @@ export async function POST(_request: Request) {
     - Industry: ${industry}
     - Style Preference: ${stylePreference}
     - Color Preference: ${colorPreference}
+	- Networks: ${networks}
 
-    Respond with clear design recommendations for:
-    1. Layout
-    2. Color Palette
-    3. Font Styles
-    4. Additional Design Elements
+	Example Input format for Networks:
+	{
+		"slug":"customlink",
+		"name":"Test",
+		"username": "https://gmail.com",
+		"is_verified": true,
+		"is_customlink": true,
+		"category": "link",
+		"avatar": "https://storage.googleapis.com/sprouter-buckets/social/socialwBBhiN3kJkS4M5C9fL0l64fJvCiJNSU2c8AlxXM6qH0032WtYpt3SAfb.jpg",
+		"is_scheduled": "0",
+	}
+
+	Note: The category defines the type of networks for user like link, musicLink, customFiles,embed.
+
+    Example Output format:
+	{
+		"slug": "customlink",
+		"provider_id": null,
+		"name": "Test",
+		"username": "https://gmail.com",
+		"token": null,
+		"refresh_token": null,
+		"category": "link",
+		"expires_in": null,
+		"expires_at": "NULL",
+		"is_verified": true,
+		"is_customlink": true,
+		"is_textbox": true,
+		"is_embed": null,
+		"embed_code": null,
+		"avatar": "https://storage.googleapis.com/sprouter-buckets/social/socialwBBhiN3kJkS4M5C9fL0l64fJvCiJNSU2c8AlxXM6qH0032WtYpt3SAfb.jpg",
+		"is_scheduled": "0",
+		"textbox": {
+		"connection_id": 25850,
+		"description": "",
+		"box_type": "solid",
+		"border_type": "curve",
+		"text_align": "text-center",
+		"text_color": "#000000FF",
+		"border_color": "#C4C4C4FF",
+		"background_color": "#FFFFFFFF",
+		"is_layouts": 3
+		}
+	}
+
   `
 
 	const payload = {
